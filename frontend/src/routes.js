@@ -4,6 +4,8 @@ import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
 import SentOtp from './pages/Otp/sent/SentOtp';
 import VerifyOtp from './pages/Otp/verify/VerifyOtp';
+import SentOtp1 from './pages/Otp/sent/SentOtp1';
+import Verifyotp1 from './pages/Otp/verify/VerifyOtp1';
 
 
 
@@ -13,6 +15,8 @@ const routes = [
 {path:'/signup', component:SignUp},
 {path:'/login', component:Login},
 {path:'/sentotp', component:SentOtp},
-{path:'/verifyotp', component:VerifyOtp}
+{path:'/verifyotp', component:VerifyOtp},
+{path:'/sentotp1', component:SentOtp1},
+{path:'/verifyotp1',component:Verifyotp1}
 ];
 export default routes

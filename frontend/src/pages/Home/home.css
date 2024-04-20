@@ -1,0 +1,48 @@
+/* .hero {
+    background-color: rgb(242, 242, 160);
+}
+
+.features{
+    background-color: rgb(248, 76, 76);
+}
+.testimonials{
+    background-color:rgb(73, 233, 67) ;
+}
+
+footer{
+    background-color: rgb(255, 192, 192);
+} */
+
+
+li{
+    color: greenyellow;
+}
+
+li:hover{
+    color: #ff0;
+}
+
+h1{
+    color: yellowgreen;
+}
+h2{
+    color: yellowgreen;
+    text-decoration: underline;
+}
+p{
+    color: yellowgreen;
+}
+p a{
+    color: rgb(235, 241, 224);
+}
+ button{
+    border-color: white;
+    color: rgb(16, 15, 15);
+ }
+
+ .homepage{
+    height: 90vh;
+    background-image: url(../../photos/istockphoto-1355569095-612x612.jpg);
+    background-size:cover;
+    background-position: center;
+ }

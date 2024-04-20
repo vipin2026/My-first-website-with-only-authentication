@@ -1,7 +1,8 @@
 import React from 'react'
 import './home.css'
-import {Link} from 'react-router-dom'
-import { toast } from 'react-toastify';
+// import {Link} from 'react-router-dom'
+// import { toast } from 'react-toastify';
+
 // import Topbar from '../../components/Topbar/Topbar'
 
 export default function Home(){
@@ -10,14 +11,14 @@ export default function Home(){
 
 
     const handleCTAClick = () => {
-        toast.success('You clicked the CTA!');
+      
         alert('hello you  got the right click')
       };
 
     return(
         <>
       <div className="homepage">
-      <header>
+      {/* <header>
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
@@ -25,15 +26,15 @@ export default function Home(){
             <li><Link to="/contact">Contact</Link></li>
           </ul>
         </nav>
-      </header>
+      </header> */}
       <main>
         <section className="hero">
-          <h1>Welcome to VS Organisation</h1>
-          <p>Your go-to destination for all things amazing!</p>
+          <h1>Welcome to My website</h1>
+          <p>It is my first Demo website build with using React.js</p>
           <button onClick={handleCTAClick}>Learn More</button>
         </section>
         <section className="features">
-          <h2>Our Features</h2>
+          <h2>On Going Future Projects </h2>
           <ul>
             <li>Bikes</li>
             <li>Cars</li>
@@ -44,11 +45,7 @@ export default function Home(){
           <h2>Testimonials</h2>
           <div className="testimonial">
             <p>if you want to buys luxury thing then you are on the correct website</p>
-            <p>-Vipin Singh</p>
-          </div>
-          <div className="testimonial">
-            <p>"you can buy highly modified stuff here"</p>
-            <p>- Vipin Singh</p>
+            <p>you can buy highly modified stuff here</p>
           </div>
         </section>
       </main>

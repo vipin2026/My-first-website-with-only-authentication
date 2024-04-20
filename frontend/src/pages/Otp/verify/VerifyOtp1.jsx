@@ -1,14 +1,14 @@
 import React,{useState} from 'react'
-import './verifyotp.css'
+import './verifyotp1.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 
-export default function Verifyotp() {
+export default function Verifyotp1() {
 
 const navigate = useNavigate();
 const [otp, setOtp] = useState({
-    email:'',
+    contact:'',
     otp:''
 })
 
@@ -32,7 +32,7 @@ event.preventDefault();
 
 let body = {
     otp:otp.otp,
-    email:sessionStorage.getItem('email')
+    email:sessionStorage.getItem('contact')
 }
 console.log(body,"body")
 axios.post('http://localhost:4000/user/v1/verify_otp_email',body)
@@ -40,7 +40,7 @@ axios.post('http://localhost:4000/user/v1/verify_otp_email',body)
     console.log(res.data,"resposne")
     if(res.data.status){
         alert(res.data.message)
-        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('contact')
         navigate('/login')
     }else{
         alert(res.data.message)

@@ -1,12 +1,16 @@
 const mongoose = require('mongoose')
 const Schema = new mongoose.Schema({
-    to:{
-        type: String,
-        trim:true
+    contact: {
+        type: Number,
+        trim: true
     },
-    otp:{
-        type:Number
+    email: {
+        type: String,
+        trim: true
+    },
+    otp: {
+        type: Number
     }
-}) 
-const otpModel = mongoose.model('otp',Schema)
+})
+const otpModel = mongoose.model('otp', Schema)
 module.exports = otpModel

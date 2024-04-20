@@ -53,16 +53,16 @@ export default function SignUp() {
             <div className='form-container'>
                 <form onSubmit={submitForm}>
                     <div className='input-field'>
-                        <input type="text" id='name'  onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='enter your name' required/>
+                        <input type="text" id='name'  onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your name' required/>
                     </div>
                     <div className='input-field'>
-                        <input type="contact" id='contact' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='enter your contact number' required/>
+                        <input type="contact" id='contact' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your contact number' required/>
                     </div>
                     <div className='input-field'>
-                        <input type="email" id='email' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='enter your email' required/>
+                        <input type="email" id='email' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your email' required/>
                     </div>
                     <div className='input-field'>
-                        <input type="password" id='password' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='enter your password' required/>
+                        <input type="password" id='password' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your password' required/>
                     </div>
                     <div className="button">
                         <button>Sign Up</button>
