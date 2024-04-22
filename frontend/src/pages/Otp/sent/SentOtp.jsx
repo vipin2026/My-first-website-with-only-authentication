@@ -31,7 +31,8 @@ export default function Otp() {
             .then((res) => {
                 console.log(res.data, "response")
                 if (res.data.status) {
-                    alert(res.data.message)
+                    // alert(res.data.message)
+                    toast.success(res.data.message,{autoClose:1000})
                     sessionStorage.setItem('email', email.email)
                     navigate('/verifyotp')
                 } else {

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './login.css'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,Link } from 'react-router-dom'
 
 export default function Login() {
     const navigate = useNavigate()
@@ -30,12 +30,16 @@ export default function Login() {
             .then((res) => {
                 console.log(res.data, "response")
                 if (res.data.status) {
-                    alert('Login !! successfully')
+                    // alert('Login !! successfully')
+                    toast.success('Login !! successfully', {autoClose:1000});
                     sessionStorage.setItem('token', res.data.result.token)
                     sessionStorage.setItem('email', res.data.result.email)
-                    navigate('/')
+                    sessionStorage.setItem('name', res.data.result.name)
+                    sessionStorage.setItem('contact', res.data.result.contact)
+                    navigate('/profile')
                 } else {
-                    alert(res.data.message)
+                    // alert(res.data.message)
+                    toast.error(res.data.message,{autoClose:1000})
                 }
             }).catch((error) => {
                 console.log('Error', error)
@@ -55,6 +59,9 @@ export default function Login() {
                     </div>
                     <div className='button'><button>Login</button></div>
                 </form>
+                <div className='signup-button'>
+                    <p>Don't have an account? <Link to='/signup'>SingUp</Link></p>
+                </div>
             </div>
         </>
     )

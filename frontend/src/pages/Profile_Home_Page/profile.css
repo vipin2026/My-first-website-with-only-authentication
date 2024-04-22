@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    perspective: 1000px; /* Add perspective for 3D effect */
+}
+
+/* Styles for each user detail box */
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%; /* Set the width of the details div */
+    max-width: 600px; /* Limit the maximum width */
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc; /* Add border style */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d; /* Preserve 3D transformation */
+    transition: transform 0.5s; /* Add smooth transition */
+}
+
+/* Styles for divs inside the user detail box */
+.detail div {
+    width: 100%; /* Set width to 100% */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    border: 1px solid #ccc; /* Add border style */
+    border-radius: 4px; /* Add border radius */
+    padding: 5px 10px; /* Add padding */
+    margin-bottom: 5px; /* Add margin */
+}
+
+
+
+
+.detail:hover {
+    transform: rotateY(10deg); /* Rotate on hover for 3D effect */
+    border: 2px solid blueviolet; 
+}
+
+.name-bar {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile_pic {
+    width: 150px;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s; /* Add transition for smooth effect */
+}
+
+.profile_pic img {
+    width: 40%;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+
+.profile_pic:hover {
+    transform: scale(1.1); /* Zoom in by 10% on hover */
+}
+
+
+.user_detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-value {
+    margin-bottom: 10px;
+}
+
+/* Style the link-like elements to look like buttons */
+.input-value:hover {
+    cursor: pointer;
+
+}
+

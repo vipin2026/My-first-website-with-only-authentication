@@ -31,7 +31,8 @@ export default function SentOtp1() {
             .then((res) => {
                 console.log(res.data, "response")
                 if (res.data.status) {
-                    alert(res.data.message)
+                    // alert(res.data.message)
+                    toast.success(res.data.message,{autoClose:1000})
                     sessionStorage.setItem('contact',contact.contact)
                     navigate('/verifyotp1')
                 } else {

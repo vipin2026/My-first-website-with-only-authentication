@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import './verifyotp1.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
 
 
 export default function Verifyotp1() {
@@ -39,7 +40,8 @@ axios.post('http://localhost:4000/user/v1/verify_otp_email',body)
 .then((res)=>{
     console.log(res.data,"resposne")
     if(res.data.status){
-        alert(res.data.message)
+        // alert(res.data.message)
+        toast.success(res.data.message,{autoClose:1000})
         sessionStorage.removeItem('contact')
         navigate('/login')
     }else{

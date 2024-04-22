@@ -3,7 +3,7 @@ import './home.css'
 // import {Link} from 'react-router-dom'
 // import { toast } from 'react-toastify';
 
-// import Topbar from '../../components/Topbar/Topbar'
+import Topbar from '../../components/Topbar/Topbar'
 
 export default function Home(){
 
@@ -27,6 +27,7 @@ export default function Home(){
           </ul>
         </nav>
       </header> */}
+      <Topbar/>
       <main>
         <section className="hero">
           <h1>Welcome to My website</h1>

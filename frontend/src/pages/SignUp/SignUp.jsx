@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './signUp.css'
 import  axios from "axios";
 import {toast} from 'react-toastify'
+import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -34,12 +35,12 @@ export default function SignUp() {
             .then((res) => {
                 console.log(res.data, "response")
                 if (res.data.status) {
-                    alert('Sign Up!! successfully')
-                    // toast('signup successfully')
+                    // alert('Sign Up!! successfully')
+                    toast('signup successfully',{autoClose:1000})
                     navigate('/sentotp')
                 } else {
-                    // toast.error('Wrong Credentials')
-                    alert(res.data.message)
+                    toast.error('Wrong Credentials')
+                    // alert(res.data.message)
                 }
             }).catch((error) => {
                 console.log('Error', error)
@@ -68,6 +69,9 @@ export default function SignUp() {
                         <button>Sign Up</button>
                     </div>
                 </form>
+                <div className='login-button'>
+                    <p>Already have a account? <Link to='/login'>Login</Link></p>
+                </div>
             </div>
         </>
     )
