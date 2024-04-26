@@ -43,7 +43,7 @@ module.exports = {
       const message =await  client.messages.create({
         body: body,
         from: process.env.NUMBER,
-        to:phoneNumber      //'+918708558265'
+        to:phoneNumber      
     })
     console.log(message.sid,"message hogya")
     
