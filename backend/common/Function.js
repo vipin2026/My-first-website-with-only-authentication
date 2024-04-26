@@ -35,8 +35,8 @@ module.exports = {
 
   sentOtp: async ({phoneNumber,body}) => {
     console.log(phoneNumber , body ,"yr arhi hai")
-    const accountSid = 'AC4459e9ee9e5813a07c53251ab244466f';
-    const authToken = 'ac20835e223a907b67aa43ac263e87a8';
+    const accountSid = process.env.ACCOUNT_SID;
+    const authToken = process.env.AUTH_TOKEN;
     const client = require('twilio')(accountSid, authToken);
 
     try {
