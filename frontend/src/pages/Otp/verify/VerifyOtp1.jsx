@@ -33,7 +33,7 @@ event.preventDefault();
 
 let body = {
     otp:otp.otp,
-    email:sessionStorage.getItem('contact')
+    contact:sessionStorage.getItem('contact')
 }
 console.log(body,"body")
 axios.post('http://localhost:4000/user/v1/verify_otp_email',body)
@@ -60,7 +60,7 @@ axios.post('http://localhost:4000/user/v1/verify_otp_email',body)
             <div className='form-container'>
                 <form onSubmit={SubmitForm}>
                 <h1>Otp Sent to your email</h1>
-            <p>enter otp you recieved on email</p>
+            <p>enter otp you recieved on registerd mobile number</p>
                     <div className='input-field'>
                         <input type="otp" id='otp' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter OTP' required />
                     </div>

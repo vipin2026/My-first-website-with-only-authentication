@@ -53,7 +53,7 @@ export default function SentOtp1() {
                     <h1>Verify your account</h1>
                     <p>Enter your Registered Contact</p>
                     <div className='input-field'>
-                        <input type="email" id='email' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your registered Contact' required />
+                        <input type="contact" id='contact' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your registered Contact' required />
                     </div>
                     <div className="button">
                         <button>Sent Otp</button>

@@ -5,7 +5,7 @@ const Schema = new mongoose.Schema({
         trim:true
     },
     contact:{
-        type:Number
+        type:String
         
     },
     email:{
@@ -20,6 +20,11 @@ const Schema = new mongoose.Schema({
     token:{
         type:String
         
+    },
+    profile_pic:{
+        type:String,
+        trim:true,
+        default:""
     }
     // last_update:{type:Number , default:()=>Date.now()}
 

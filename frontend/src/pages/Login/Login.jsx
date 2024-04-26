@@ -60,7 +60,7 @@ export default function Login() {
                     <div className='button'><button>Login</button></div>
                 </form>
                 <div className='signup-button'>
-                    <p>Don't have an account? <Link to='/signup'>SingUp</Link></p>
+                    <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
                 </div>
             </div>
         </>

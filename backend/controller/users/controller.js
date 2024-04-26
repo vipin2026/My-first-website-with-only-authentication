@@ -25,10 +25,23 @@ module.exports = {
             body.password = hash
             const token = JWT.sign({ contact: body.contact }, secretkey)
             body.token = token
+            body.contact = '+91' + body.contact;
             const data = await userModel(body).save()
             const user = await userModel.findOne({ _id: data._id })
             delete user.password
+
             res.status(200).send({ status: true, code: 200, message: "SignUp successfully", result: user })
+
+            let htmlStr = `    
+            <body>
+            <h1>Dear ${user.name}</h1>
+              <h1>Thanks for being part of our family</h1>
+              <p>You have successfully created your account.</p>
+              <p>Your login email id = ${user.email}</p>
+            </body>`;
+            let mail = user.email;
+            let subject = `Thanks for Applying as a maid  ${user.name}`;
+            await commonFun.sendMail({ to: mail, subject: subject, html: htmlStr });
         } catch (error) {
             console.log(error)
             res.status(500).send({ status: false, code: 500, message: "ERROR" })
@@ -37,29 +50,31 @@ module.exports = {
 
     login: async (req, res) => {
         try {
-            let body = req.body
+            let body = req.body;
             console.log(body, "body")
-            let user = await userModel.findOne({ email: body.email })
+            let user = await userModel.findOne({ email: body.email });
             if (!user) {
-                return res.status(201).send({ status: false, code: 201, message: "user not found" })
+                return res.status(201).send({ status: false, code: 201, message: "User not found" });
             }
-            let verify = await ARGON.verify(user.password, body.password)
+            let verify = await ARGON.verify(user.password, body.password);
             if (!verify) {
-                res.status(201).send({ status: false, code: 201, message: "InCorrect Password" })
+                return res.status(201).send({ status: false, code: 201, message: "Incorrect Password" });
             }
-            let token = JWT.sign({ contact: user.contact }, secretkey)
-            let data = await userModel.findOneAndUpdate({ _id: user._id }, { token: token }, { new: true })
-            delete data.password
-            res.status(200).send({ status: true, code: 200, message: "Login Successfully", result: data })
+            let token = JWT.sign({ contact: user.contact }, secretkey);
+            let data = await userModel.findOneAndUpdate({ _id: user._id }, { token: token }, { new: true });
+            delete data.password;
+            res.status(200).send({ status: true, code: 200, message: "Login Successfully", result: data });
         } catch (error) {
-            console.log(error, "error")
-            res.status(500).send({ status: false, code: 500, message: "ERROR" })
+            console.log(error);
+            res.status(500).send({ status: false, message: "Internal Server Error" });
         }
     },
+
 
     sentOtp: async (req, res) => {
         try {
             let body = req.body
+            console.log(body, "shshsh")
             let otp = Math.floor(Math.random() * 1000)
             let user = await userModel.findOne({ email: body.email })
             if (!user) { return res.status(201).send({ status: false, code: 201, message: "user not found" }) }
@@ -70,7 +85,7 @@ module.exports = {
         <p>Please use this OTP to verify your account.</p>
       </body>`;
             let mail = body.email;
-            let subject = `Your one time account verification code is ${otp}`;
+            let subject = `Your one time code is ${otp}`;
             await commonFun.sendMail({ to: mail, subject: subject, html: htmlStr });
             await otpModel.deleteMany({ email: body.email })
             await otpModel.findOneAndUpdate({ email: body.email }, { $set: { otp: otp, email: body.email } }, { new: true, lean: true })
@@ -89,23 +104,31 @@ module.exports = {
     sendOtp_Contact: async (req, res) => {
         try {
             let body = req.body;
-            console.log(body,"body")
-            const checkUser = await userModel.findOne({ contact: body.contact })
+            console.log(body, "body")
+            let number = '+91' + body.contact;
+            console.log(number, "number")
+            const checkUser = await userModel.findOne({ contact: number })
             if (!checkUser) { return res.status(201).send({ status: false, code: 201, message: "Contact not registered" }) }
-            const checkOtp = await otpModel.findOne({ contact: body.contact })
+            const checkOtp = await otpModel.findOne({ contact: number })
             let otp = Math.floor(Math.random() * 9000) + 1000;
-            let obj  ={
-                contact:body.contact,
-                otp:otp
+            let obj1 = `
+Dear ${checkUser.name}
+Your OTP is: ${otp}
+Please use this OTP to verify your account.
+`
+            await commonFun.sentOtp({ phoneNumber: number, body: obj1 });
+            let obj = {
+                contact: number,
+                otp: otp
             }
-            if(!checkOtp){
+            if (!checkOtp) {
                 const data = await otpModel(obj).save()
-                console.log(data,"data")
-                res.status(200).send({status: true, code:200, message:"OTP SENT SUCCESSFULLY", result:data})
-            }else{
-                const data = await otpModel.findOneAndUpdate({contact:body.contact},{$set:{otp:otp}},{new:true})
-                console.log(data,"data")
-                res.status(200).send({status: true , code: 200  , message:"OTP SENT SUCCESSFULLY" , result:data})
+                console.log(data, "data")
+                res.status(200).send({ status: true, code: 200, message: "OTP SENT SUCCESSFULLY", result: data })
+            } else {
+                const data = await otpModel.findOneAndUpdate({ contact: number }, { $set: { otp: otp } }, { new: true })
+                console.log(data, "data")
+                res.status(200).send({ status: true, code: 200, message: "OTP SENT SUCCESSFULLY", result: data })
             }
 
         } catch (error) {
@@ -114,37 +137,106 @@ module.exports = {
         }
     },
 
-    verify_otp_email:async(req,res)=>{
+    verify_otp_email: async (req, res) => {
         try {
             let body = req.body;
-            console.log(body,"body")
-            let verify = await otpModel.findOne({email:body.email, otp:body.otp})
-            if(!verify){
-                return res.status(201).send({status: false, code:201, message:"Invalid OTP"})
+            console.log(body, "body")
+            let verify = await otpModel.findOne({ email: body.email, otp: body.otp })
+            if (!verify) {
+                return res.status(201).send({ status: false, code: 201, message: "Invalid OTP" })
             }
-            res.status(200).send({status: true , code: 200, message:"Account verified successfully"})
-            await otpModel.findOneAndDelete({email:body.email})
+            res.status(200).send({ status: true, code: 200, message: "Account verified successfully" })
+            await otpModel.findOneAndDelete({ email: body.email })
         } catch (error) {
             console.log(error)
-            res.status(500).send({status:false , code: 500, message:"ERROR"})
+            res.status(500).send({ status: false, code: 500, message: "ERROR" })
         }
     },
 
-    verify_otp_contact:async(req,res)=>{
+    verify_otp_contact: async (req, res) => {
         try {
-          let body = req.body;
-          console.log(body,"body")
-          let verify = await otpModel.findOne({contact:body.contact , otp:body.otp})
-          if(!verify){
-            return res.status(201).send({status: false, code: 201, message:"Invalid OTP"})
-          }  
-          res.status(200).send({status: true , code: 200 , message:"Account verified Successfullly"})
-          await otpModel.findOneAndDelete({contact: body.contact})
+            let body = req.body;
+            console.log(body, "body")
+            let number = '+91' + body.contact
+            let verify = await otpModel.findOne({ contact: number, otp: body.otp })
+            if (!verify) {
+                return res.status(201).send({ status: false, code: 201, message: "Invalid OTP" })
+            }
+            res.status(200).send({ status: true, code: 200, message: "Account verified Successfullly" })
+            await otpModel.findOneAndDelete({ contact: number })
         } catch (error) {
             console.log(error)
-            res.status(500).send({status: false, code: 500 , messgae:"ERROR"})
+            res.status(500).send({ status: false, code: 500, messgae: "ERROR" })
+        }
+    },
+    upload_profilePic: async (req, res) => {
+        try {
+
+            const profilePic = req.file.filename;
+            console.log(profilePic, "profile_pic")
+            console.log(req.result, " user detrails")
+            const user = await userModel.findOneAndUpdate({ _id: req.result.id }, { $set: { profile_pic: profilePic } }, { new: true })
+            if (!user) return res.status(201).send({ status: false, code: 201, message: "Getting error while uploading profile pic" })
+            res.status(200).send({ status: false, code: 200, message: "Profile  Update successfully", result: user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({ status: false, code: 500, message: "ERROR" })
+        }
+    },
+
+
+    get_user: async (req, res) => {
+        try {
+            console.log(req.result, " user details arhi hai kya ")
+            const user = await userModel.findOne({ _id: req.result.id })
+            res.status(200).send({ status: true, code: 200, message: "USER FOUND", result: user })
+        } catch (error) {
+            console.log(err)
+            res.status(500).send({ status: false, code: 500, message: "ERROR" })
+        }
+    },
+
+    get_profile: async (req, res) => {
+        try {
+            const user = await userModel.findOne({ _id: req.result.id }).lean()
+            delete user.password
+            if (user.profile_pic !== "" && user.profile_pic !== "blank_pic.png") {
+                user.profile_pic = `${process.env.Local_URL}:${process.env.PORT}/uploads/${user.profile_pic}`
+                console.log(user.profile_pic, "profile_pic")
+                res.status(200).send({ status: true, code: 200, message: "Profile loaded successfully", result: user })
+            } else {
+                user.profile_pic = `${process.env.LOCAL_URL}:${process.env.PORT}/uploads/blank_pic.png`
+                console.log(user.profile_pic, "profile_pic")
+                res.status(200).send({ status: true, code: 200, message: messages.PROFILE_UPDATED, result: user });
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({ status: false, code: 500, message: "ERROR" })
+        }
+    },
+
+    get_user_list: async (req, res) => {
+        try {
+            console.log(req.result)
+            let users = await userModel.find({})
+            console.log(users.length)
+            let data = [];
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].profile_pic !== "") {
+                    data.push(users[i]);
+                }
+            }
+            console.log(...data,"yaha arha hai ")
+            if (!users) return res.status(201).send({ status: 201, code: 201, message: "failed to fetching data" })
+            // console.log(users,"all user data")
+            res.status(200).send({ status: true, code: 200, message: "List of all Users", result: users })
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({ status: false, code: 500, message: "ERROR" })
         }
     }
+
 
 
 

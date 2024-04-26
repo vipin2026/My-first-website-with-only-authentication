@@ -44,6 +44,7 @@ export default function SignUp() {
                 }
             }).catch((error) => {
                 console.log('Error', error)
+                toast.error('ENTER  Valid detials')
             })
 
         // navigate('/login')
@@ -57,7 +58,7 @@ export default function SignUp() {
                         <input type="text" id='name'  onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your name' required/>
                     </div>
                     <div className='input-field'>
-                        <input type="contact" id='contact' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your contact number' required/>
+                        <input type="text" id='contact' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your contact number' required/>
                     </div>
                     <div className='input-field'>
                         <input type="email" id='email' onKeyDown={handleKeyDown} onChange={InputEvent} placeholder='Enter your email' required/>
