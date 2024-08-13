@@ -11,7 +11,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f9f9f9;
+    background-color: #a1ef95;
     perspective: 1000px; /* Add perspective for 3D effect */
 }
 
@@ -24,11 +24,12 @@ body {
     max-width: 600px; /* Limit the maximum width */
     padding: 20px;
     margin: 10px;
-    border: 1px solid #ccc; /* Add border style */
+    border: 5px solid #e8efe9; /* Add border style */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transform-style: preserve-3d; /* Preserve 3D transformation */
     transition: transform 0.5s; /* Add smooth transition */
+   
 }
 
 /* Styles for divs inside the user detail box */
@@ -39,6 +40,7 @@ body {
     border-radius: 4px; /* Add border radius */
     padding: 5px 10px; /* Add padding */
     margin-bottom: 5px; /* Add margin */
+    background-color: rgb(121, 176, 243);
 }
 
 
@@ -46,7 +48,7 @@ body {
 
 .detail:hover {
     transform: rotateY(10deg); /* Rotate on hover for 3D effect */
-    border: 2px solid blueviolet; 
+    border: 2px solid rgb(8, 43, 16); 
 }
 
 .name-bar {

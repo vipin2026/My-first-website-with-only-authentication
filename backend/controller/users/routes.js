@@ -22,6 +22,8 @@ router.get('/get_profile',authenticator,Controller.get_profile),
 router.get('/get_user_list',authenticator,Controller.get_user_list),
 
 
+// 
+
 
 
 module.exports = router;

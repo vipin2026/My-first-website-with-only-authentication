@@ -1,0 +1,37 @@
+.Test-Container{
+    border: 5px solid rgb(18, 22, 22);
+    max-width: 400px;
+    height: 200px;
+    overflow: hidden; 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 10px auto;
+   padding: 5px;
+   border-radius: 10px;
+   
+}
+.Test-Container:hover{
+    background-color: grey;
+    .input-field-test input{
+        background-color: yellow;
+    }
+}
+
+.input-field-test{
+    padding: 10px;
+  
+}
+.input-field-test input{
+    border-radius: 5px;
+    
+}
+
+.button-test{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-test button:active{
+    background-color: aqua;
+}

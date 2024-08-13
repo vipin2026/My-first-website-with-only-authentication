@@ -189,7 +189,7 @@ Please use this OTP to verify your account.
     get_user: async (req, res) => {
         try {
             console.log(req.result, " user details arhi hai kya ")
-            const user = await userModel.findOne({ _id: req.result.id })
+            const user = await userModel.find({})
             res.status(200).send({ status: true, code: 200, message: "USER FOUND", result: user })
         } catch (error) {
             console.log(err)

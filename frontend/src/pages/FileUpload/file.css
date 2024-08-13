@@ -1,0 +1,86 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f0f2f5;
+  margin: 0;
+}
+
+.file-upload {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+
+.file-upload div {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-upload label {
+  margin-bottom: 5px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.file-upload input[type="text"],
+.file-upload input[type="email"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.file-upload input[type="text"]:focus,
+.file-upload input[type="email"]:focus {
+  border: 1px solid #007bff;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background: #0056b3;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-name {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.file-upload button {
+  padding: 10px 15px;
+  background: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.file-upload button:hover {
+  background: #218838;
+}
